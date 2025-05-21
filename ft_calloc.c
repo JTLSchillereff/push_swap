@@ -1,16 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 09:18:41 by jleal             #+#    #+#             */
-/*   Updated: 2025/04/20 14:25:26 by jleal            ###   ########.fr       */
+/*   Created: 2025/04/18 09:35:02 by jleal             #+#    #+#             */
+/*   Updated: 2025/05/21 15:35:01 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
+
+static void ft_bzero(void *s, size_t n)
+{
+    unsigned char *tmp_ptr;
+
+    if (!s)
+        return;
+    tmp_ptr = (unsigned char *)s;
+    while (n > 0)
+    {
+        *(tmp_ptr++) = 0;
+        n--;
+    }
+}
+
+void *ft_calloc(size_t count, size_t size)
+{
+    unsigned char *ptr;
+
+    if (size && count > (size_t)-1 / size)
+        return (NULL);
+    ptr = malloc(count * size);
+    if (!ptr)
+        return (NULL);
+    ft_bzero(ptr, count * size);
+    return (ptr);
+}
 
 // Copy memory area
 void *ft_memcpy(void *dst, const void *src, size_t n)
@@ -29,29 +56,3 @@ void *ft_memcpy(void *dst, const void *src, size_t n)
     }
     return (dst);
 }
-
-// TESTING AREA//
-/* static void test_ft_memcpy(void) {
-    printf(YELLOW "\nTESTING ft_memcpy()\n" RESET);
-
-    char src[10] = "123456789";
-    char dst1[10] = {0};
-    char dst2[10] = {0};
-    size_t n = 5;
-
-    ft_memcpy(dst1, src, n);
-    memcpy(dst2, src, n);
-
-    if (memcmp(dst1, dst2, 10) != 0) {
-        printf(RED "FAIL: ft_memcpy() did not match memcpy()\n" RESET);
-        printf("  ft_memcpy result: %.*s\n", 10, dst1);
-        printf("  memcpy result:    %.*s\n", 10, dst2);
-        return;
-    }
-    printf(GREEN "ft_memcpy: OK!\n" RESET);
-}
-
-int main(void)
-{
-    test_ft_memcpy();
-}  */

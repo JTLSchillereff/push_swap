@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   push_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/17 17:40:55 by jleal             #+#    #+#             */
-/*   Updated: 2025/04/26 19:39:16 by jleal            ###   ########.fr       */
+/*   Created: 2025/05/21 15:29:20 by jleal             #+#    #+#             */
+/*   Updated: 2025/05/21 15:54:17 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "push_swap.h"
 
-# include <stdarg.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <limits.h>
-# include <fcntl.h>
+void push(t_node **stk1, t_node **stk2)
+{
+	t_node *tmp;
 
-int	ft_printf(const char *format, ...);
-
-int	print_ptr(void *ptr);
-
-int	ft_putnbr_base(long int nbr, char *base);
-
-int	ft_strlen_new(char *s);
-
-int	ft_printchar(int c);
-
-int	ft_printstr(char *str);
-
-#endif
+	if (!*stk1)
+		return;
+	tmp = *stk1;
+	*stk1 = (*stk1)->next;
+	(*stk1)->prev = NULL;
+	tmp->next = NULL;
+	if (!*stk2)
+		*stk2 = tmp;
+	else
+	{
+		tmp->next = *stk2;
+		(*stk2)->prev = tmp;
+		*stk2 = tmp;
+	}
+}

@@ -1,35 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   swap_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/17 17:40:55 by jleal             #+#    #+#             */
-/*   Updated: 2025/04/26 19:39:16 by jleal            ###   ########.fr       */
+/*   Created: 2025/05/21 15:32:39 by jleal             #+#    #+#             */
+/*   Updated: 2025/05/21 15:57:03 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "push_swap.h"
 
-# include <stdarg.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <limits.h>
-# include <fcntl.h>
+void swap(t_node **stk)
+{
+	long tmp;
 
-int	ft_printf(const char *format, ...);
-
-int	print_ptr(void *ptr);
-
-int	ft_putnbr_base(long int nbr, char *base);
-
-int	ft_strlen_new(char *s);
-
-int	ft_printchar(int c);
-
-int	ft_printstr(char *str);
-
-#endif
+	if (!*stk || !(*stk)->next)
+		return;
+	tmp = (*stk)->value;
+	(*stk)->value = (*stk)->next->value;
+	(*stk)->next->value= tmp;
+}
