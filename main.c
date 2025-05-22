@@ -1,45 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 12:23:37 by jleal             #+#    #+#             */
-/*   Updated: 2025/05/21 15:32:56 by jleal            ###   ########.fr       */
+/*   Updated: 2025/05/22 18:13:43 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+int	stack_sorted(t_node	*stk)
+{
+	int	num;
+
+	if (!stk)
+		return (1);
+	num = INT_MIN;
+	while (stk)
+	{
+		if (stk->value < num)
+			return (0);
+		num = stk->value;
+		stk = stk->next;
+	}
+	return (1);
+}
+
 int main(int ac, char **av)
 {
-	t_node *a_stack;
-	t_node *b_stack;
+	t_node *a;
+	t_node *b;
 
-	a_stack = NULL;
-	b_stack = NULL;
-	if (ac > 1)
+	a = NULL;
+	b = NULL;
+	if (ac == 1 || (ac == 2 && !av[1][0]))
+		return (1);
+	else if (ac == 2)
+		av = ft_split(av[1], ' ');
+	stack_init(&a, av, ac == 2);
+	if (!stack_sorted(a))
 	{
-		a_stack = make_stack(&av[1]);
-		if (!a_stack)
-			return (-1);
-		print_stacks(&a_stack, &b_stack);
-		printf("swap a\n");
-		swap(&a_stack);
-		print_stacks(&a_stack, &b_stack);
-		printf("push b ");
-		push(&a_stack, &b_stack);
-		printf("I");
-		push(&a_stack, &b_stack);
-		printf("I");
-		push(&a_stack, &b_stack);
-		printf("I\n");
-		print_stacks(&a_stack, &b_stack);
-		printf("rotate\n");
-		rotate(&b_stack);
-		rrotate(&a_stack);
-		print_stacks(&a_stack, &b_stack);
+		push_swap(&a, &b);
 	}
-	return (0);
 }

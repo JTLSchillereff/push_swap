@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_init.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jleal <jleal@student.42lisboa.com>         +#+  +:+       +#+        */
+/*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 14:11:29 by jleal             #+#    #+#             */
-/*   Updated: 2025/05/21 15:20:18 by jleal            ###   ########.fr       */
+/*   Updated: 2025/05/22 12:42:50 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <limits.h>
 
 void	set_current_position(t_node *stk)
 {
@@ -19,7 +18,7 @@ void	set_current_position(t_node *stk)
 	int	centerline;
 
 	i = 0;
-	if (NULL == stk)
+	if (!stk)
 		return ;
 	centerline = stack_len(stk) / 2;
 	while (stk)
@@ -46,8 +45,7 @@ static void	set_target_node(t_node *a, t_node *b)
 		curr_a = a;
 		while (curr_a)
 		{
-			if (curr_a->value > b->value
-				&& curr_a->value < best_match)
+			if (curr_a->value > b->value && curr_a->value < best_match)
 			{
 				best_match = curr_a->value;
 				target = curr_a;

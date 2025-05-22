@@ -6,59 +6,48 @@
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:24:35 by jleal             #+#    #+#             */
-/*   Updated: 2025/05/21 16:02:20 by jleal            ###   ########.fr       */
+/*   Updated: 2025/05/22 19:20:06 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_node *make_node(int n)
+void append_node(t_node **stk, int nbr)
 {
-	t_node *new;
-
-	new = malloc(sizeof(t_node));
-	if (!new)
-		return (NULL);
-	new->next = NULL;
-	new->prev = NULL;
-	new->target = NULL;
-	new->value = n;
-	new->index = 0;
-	new->final_index = 0;
-	new->push_price = 0;
-	new->above_median = false;
-	new->cheapest = false;
-	return (new);
-}
-
-void append_node(t_node **lst, t_node *new)
-{
+	t_node *node;
 	t_node *last;
 
-	if (!new)
+	if (!stk)
 		return;
-	if (!*lst)
+	node = malloc(sizeof(t_node));
+	if (!node)
+		return;
+	node->next = NULL;
+	node->value = nbr;
+	if (!*stk)
 	{
-		*lst = new;
-		return;
+		*stk = node;
+		node->prev = NULL;
 	}
-	last = *lst;
-	while (last->next)
-		last = last->next;
-	last->next = new;
-	new->prev = last;
+	else
+	{
+		last = last_node(*stk);
+		last->next = node;
+		node->prev = last;
+	}
 }
 
 void print_stacks(t_node **a_stack, t_node **b_stack)
 {
-	t_node *a;
-	t_node *b;
-
+	t_node	*a;
+	t_node	*b;
+	
 	if (!*a_stack && !*b_stack)
 		return;
 	a = *a_stack;
 	b = *b_stack;
-	printf(" A\t B\n");
+	printf("___________\n");
+	printf(" A \t B \n");
 	while (a || b)
 	{
 		if (a)
@@ -74,52 +63,82 @@ void print_stacks(t_node **a_stack, t_node **b_stack)
 		}
 		printf("\n");
 	}
+	printf("___________\n");
 }
 
-void free_stack(t_node **stack)
-{
-	t_node *tmp;
-
-	if (!*stack)
-		return;
-	while ((*stack)->next)
-	{
-		tmp = *stack;
-		*stack = (*stack)->next;
-		free(tmp);
-	}
-	free(*stack);
-}
-
-t_node *make_stack(char **av)
-{
-	t_node *stack;
-	t_node *node;
-	int num;
-
-	stack = NULL;
-	node = NULL;
-	num = 0;
-	while (*av)
-	{
-		num = ft_atoi(*av);
-		node = make_node(num);
-		if (!node)
-		{
-			free_stack(&stack);
-			return (NULL);
-		}
-		append_node(&stack, node);
-		av++;
-	}
-	return (stack);
-}
-
-t_node	*last_node(t_node *stk)
+t_node *last_node(t_node *stk)
 {
 	if (!stk)
 		return (NULL);
 	while (stk->next)
 		stk = stk->next;
 	return (stk);
+}
+
+int stack_len(t_node *stk)
+{
+	int i;
+
+	if (!stk)
+		return (0);
+	i = 0;
+	while (stk)
+	{
+		i++;
+		stk = stk->next;
+	}
+	return (i);
+}
+
+t_node *find_smallest(t_node *stk)
+{
+	long smallest;
+	t_node *smallest_node;
+
+	if (!stk)
+		return (NULL);
+	smallest = LONG_MAX;
+	while (stk)
+	{
+		if (stk->value < smallest)
+		{
+			smallest = stk->value;
+			smallest_node = stk;
+		}
+		stk = stk->next;
+	}
+	return (smallest_node);
+}
+
+t_node *find_biggest(t_node *stk)
+{
+	long biggest;
+	t_node *biggest_node;
+
+	if (!stk)
+		return (NULL);
+	biggest = LONG_MIN;
+	while (stk)
+	{
+		if (stk->value > biggest)
+		{
+			biggest = stk->value;
+			biggest_node = stk;
+		}
+		stk = stk->next;
+	}
+	return (biggest_node);
+}
+
+t_node *find_cheapest(t_node *stk)
+{
+	if (!stk)
+		return (NULL);
+	while (stk)
+	{
+		if (stk->cheapest)
+			return (stk);
+		stk = stk->next;
+	}
+	return (NULL);
 }
