@@ -6,7 +6,7 @@
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 13:18:09 by jleal             #+#    #+#             */
-/*   Updated: 2025/05/22 18:21:18 by jleal            ###   ########.fr       */
+/*   Updated: 2025/05/23 11:42:51 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,23 @@ void	fetch_cheapest_b(t_node **a, t_node **b)
 	if (*b == cheapest && *a == target)
 		return ;
 	if (!cheapest->above_median && !target->above_median)
-	{
 		while (*b != cheapest && *a != target)
 			rrr(b, a);
+	else if (cheapest->above_median && target->above_median)
+		while (*b != cheapest && *a != target)
+			rr(b, a);	
+	if (!cheapest->above_median)
 		while (*b != cheapest)
 			rrb(b);
+	else if (cheapest->above_median)
+		while (*b != cheapest)
+			rb(b);
+	if (!target->above_median)
 		while (*a != target)
 			rra(a);
-		return ;
-	}
-	while (*b != cheapest && *a != target)
-		rr(b, a);
-	while (*b != cheapest)
-		rb(b);
-	while (*a != target)
-		ra(a);
-	return ;
+	else if (target->above_median)
+		while (*a != target)
+			ra(a);
 }
 
 void	push_swap(t_node **a, t_node **b)
@@ -57,8 +58,8 @@ void	push_swap(t_node **a, t_node **b)
 	while (sl-- > 3)
 	{
 		pb(a, b);
-		print_stacks(a, b);
 	}
+	print_stacks(a, b);
 	mini_sort(a);
 	while (*b)
 	{
@@ -70,8 +71,10 @@ void	push_swap(t_node **a, t_node **b)
 	set_current_position(*a);
 	smallest = find_smallest(*a);
 	if (!smallest->above_median)
-		rra(a);
+		while (*a != smallest)
+			rra(a);
 	else
-		ra(a);
+		while (*a != smallest)
+			ra(a);
 	print_stacks(a, b);
 }
