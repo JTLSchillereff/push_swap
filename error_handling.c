@@ -6,13 +6,13 @@
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:14:40 by jleal             #+#    #+#             */
-/*   Updated: 2025/05/22 08:01:28 by jleal            ###   ########.fr       */
+/*   Updated: 2025/05/23 13:15:42 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void free_matrix(char **av)
+void	free_matrix(char **av)
 {
 	int i;
 
@@ -50,7 +50,7 @@ void	error_free(t_node **a, char **av, bool flag_ac_2)
 	exit(1);
 }
 
-int filter_syntax(char *str)
+int	filter_syntax(char *str)
 {
 	if (!(*str == '+' || *str == '-' || ft_isdigit(*str)))
 		return (1);
@@ -64,7 +64,7 @@ int filter_syntax(char *str)
 	return (0);
 }
 
-int filter_repetition(t_node *a, int n)
+int	filter_repetition(t_node *a, int n)
 {
 	if (!a)
 		return (0);

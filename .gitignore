@@ -1,2 +1,4 @@
 *.o
+*.a
 .DS_Store
+main

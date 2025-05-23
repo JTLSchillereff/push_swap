@@ -59,6 +59,6 @@ re: fclean all
 	@echo "$(PURPLE)====================================$(CLR_RESET)"
 
 v:
-	make re && clear && valgrind --leak-check=full --show-leak-kinds=all ./push_swap "1 2 3 4""5"
+	make re && clear && valgrind --leak-check=full --show-leak-kinds=all ./push_swap "1 2 3 4"
 
 .PHONY: all clean fclean re

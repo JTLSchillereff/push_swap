@@ -6,7 +6,7 @@
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 13:18:09 by jleal             #+#    #+#             */
-/*   Updated: 2025/05/23 11:42:51 by jleal            ###   ########.fr       */
+/*   Updated: 2025/05/23 13:22:58 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	push_swap(t_node **a, t_node **b)
 	t_node	*smallest;
 
 	sl = stack_len(*a);
-	print_stacks(a, b);
+	//print_stacks(a, b);
 	if (sl < 4)
 	{
 		mini_sort(a);
@@ -59,14 +59,14 @@ void	push_swap(t_node **a, t_node **b)
 	{
 		pb(a, b);
 	}
-	print_stacks(a, b);
+	//print_stacks(a, b);
 	mini_sort(a);
 	while (*b)
 	{
 		init_nodes(*a, *b);
 		fetch_cheapest_b(a, b);
 		pa(a, b);
-		print_stacks(a, b);
+		//print_stacks(a, b);
 	}
 	set_current_position(*a);
 	smallest = find_smallest(*a);
@@ -76,5 +76,5 @@ void	push_swap(t_node **a, t_node **b)
 	else
 		while (*a != smallest)
 			ra(a);
-	print_stacks(a, b);
+	//print_stacks(a, b);
 }
