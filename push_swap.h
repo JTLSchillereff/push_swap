@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/23 17:59:11 by jleal             #+#    #+#             */
+/*   Updated: 2025/05/23 17:59:54 by jleal            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
@@ -8,7 +20,7 @@
 # include <string.h>
 # include <stdbool.h>
 
-typedef struct		s_node
+typedef struct s_node
 {
 	struct s_node	*next;
 	struct s_node	*prev;
@@ -50,7 +62,7 @@ t_node	*find_smallest(t_node *stk);
 
 t_node	*find_biggest(t_node *stk);
 
-t_node *find_cheapest(t_node *stk);
+t_node	*find_cheapest(t_node *stk);
 
 void	stack_init(t_node **a, char **av, bool flag_ac_2);
 

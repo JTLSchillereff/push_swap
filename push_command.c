@@ -6,18 +6,18 @@
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:29:20 by jleal             #+#    #+#             */
-/*   Updated: 2025/05/22 19:11:41 by jleal            ###   ########.fr       */
+/*   Updated: 2025/05/23 18:02:41 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void push(t_node **stk1, t_node **stk2)
+void	push(t_node **stk1, t_node **stk2)
 {
-	t_node *tmp;
+	t_node	*tmp;
 
 	if (!*stk1)
-		return;
+		return ;
 	tmp = *stk1;
 	if (tmp->next)
 	{

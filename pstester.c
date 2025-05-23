@@ -6,7 +6,7 @@
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 13:33:03 by jleal             #+#    #+#             */
-/*   Updated: 2025/05/23 14:32:05 by jleal            ###   ########.fr       */
+/*   Updated: 2025/05/23 15:20:57 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 #define BUFFER_SIZE 1024
 
-int main(int argc, char **argv)
+/* int main(int argc, char **argv)
 {
     char buffer[BUFFER_SIZE + 1];
     int bytes_read;
@@ -56,4 +56,4 @@ int main(int argc, char **argv)
 
     free(instructions);
     return 0;
-}
+} */

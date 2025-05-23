@@ -6,7 +6,7 @@
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 17:25:31 by jleal             #+#    #+#             */
-/*   Updated: 2025/05/21 15:35:05 by jleal            ###   ########.fr       */
+/*   Updated: 2025/05/23 17:31:49 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,27 +100,3 @@ char	**ft_split(const char *str, char c)
 	}
 	return (ptrs);
 }
-
-//TETST AREA//
-/* static void test_ft_split(void) {
-    printf(YELLOW "\nTESTING ft_split()\n\n" RESET);
-    char *str = "Hello,World,42";
-    char **split = ft_split(str, ',');
-    if (strcmp(split[0], "Hello") != 0 || strcmp(split[1], "World") != 0 || strcmp(split[2], "42") != 0) {
-        printf(RED "FAIL: ft_split(\"%s\", ',') incorrect\n" RESET, str);
-        for (int i = 0; split[i]; i++) free(split[i]);
-        free(split);
-        return;
-    }
-	for (int i = 0; split[i]; i++)
-		printf(GREEN "%d: %s\n" RESET, i, split[i]);
-    for (int i = 0; split[i]; i++) free(split[i]);
-    free(split);
-
-    printf(GREEN "\nft_split: OK!\n" RESET);
-}
-
-int main(void)
-{
-    test_ft_split();
-} */

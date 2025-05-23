@@ -6,13 +6,13 @@
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 13:18:09 by jleal             #+#    #+#             */
-/*   Updated: 2025/05/23 13:22:58 by jleal            ###   ########.fr       */
+/*   Updated: 2025/05/23 20:30:02 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	fetch_cheapest_b(t_node **a, t_node **b)
+static void	fetch_cheapest_pa(t_node **a, t_node **b)
 {
 	t_node	*cheapest;
 	t_node	*target;
@@ -21,14 +21,12 @@ void	fetch_cheapest_b(t_node **a, t_node **b)
 		return ;
 	cheapest = find_cheapest(*b);
 	target = cheapest->target;
-	if (*b == cheapest && *a == target)
-		return ;
 	if (!cheapest->above_median && !target->above_median)
 		while (*b != cheapest && *a != target)
 			rrr(b, a);
 	else if (cheapest->above_median && target->above_median)
 		while (*b != cheapest && *a != target)
-			rr(b, a);	
+			rr(b, a);
 	if (!cheapest->above_median)
 		while (*b != cheapest)
 			rrb(b);
@@ -43,38 +41,102 @@ void	fetch_cheapest_b(t_node **a, t_node **b)
 			ra(a);
 }
 
+/* static void	fetch_cheapest_pb(t_node **a, t_node **b)
+{
+	t_node	*cheapest;
+	t_node	*target;
+
+	if (!*a && !*b)
+		return ;
+	cheapest = find_cheapest(*a);
+	target = cheapest->target;
+	if (!cheapest->above_median && !target->above_median)
+		while (*a != cheapest && *b != target)
+			rrr(a, b);
+	else if (cheapest->above_median && target->above_median)
+		while (*a != cheapest && *b != target)
+			rr(a, b);
+	if (!cheapest->above_median)
+		while (*a != cheapest)
+			rra(a);
+	else if (cheapest->above_median)
+		while (*a != cheapest)
+			ra(a);
+	if (!target->above_median)
+		while (*b != target)
+			rrb(b);
+	else if (target->above_median)
+		while (*b != target)
+			rb(b);
+} */
+
 void	push_swap(t_node **a, t_node **b)
 {
-	int sl;
+	int		sl;
 	t_node	*smallest;
 
 	sl = stack_len(*a);
-	//print_stacks(a, b);
 	if (sl < 4)
 	{
 		mini_sort(a);
 		return ;
 	}
-	while (sl-- > 3)
+	/* pb(a, b);
+	pb(a, b);
+	sl = sl - 2; */
+	while (sl > 3)
 	{
+		/* init_nodes(*b, *a);
+		fetch_cheapest_pb(a, b); */
 		pb(a, b);
+		sl--;
 	}
-	//print_stacks(a, b);
 	mini_sort(a);
 	while (*b)
 	{
 		init_nodes(*a, *b);
-		fetch_cheapest_b(a, b);
+		fetch_cheapest_pa(a, b);
 		pa(a, b);
-		//print_stacks(a, b);
 	}
 	set_current_position(*a);
 	smallest = find_smallest(*a);
 	if (!smallest->above_median)
 		while (*a != smallest)
 			rra(a);
-	else
-		while (*a != smallest)
-			ra(a);
-	//print_stacks(a, b);
+	while (*a != smallest)
+		ra(a);
+}
+
+int	stack_sorted(t_node	*stk)
+{
+	int	num;
+
+	if (!stk)
+		return (1);
+	num = INT_MIN;
+	while (stk)
+	{
+		if (stk->value < num)
+			return (0);
+		num = stk->value;
+		stk = stk->next;
+	}
+	return (1);
+}
+
+int	main(int ac, char **av)
+{
+	t_node	*a;
+	t_node	*b;
+
+	a = NULL;
+	b = NULL;
+	if (ac == 1 || (ac == 2 && !av[1][0]))
+		return (1);
+	else if (ac == 2)
+		av = ft_split(av[1], ' ');
+	stack_init(&a, av, ac == 2);
+	if (!stack_sorted(a))
+		push_swap(&a, &b);
+	free_stack(&a);
 }

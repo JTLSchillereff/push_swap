@@ -6,7 +6,7 @@
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:14:40 by jleal             #+#    #+#             */
-/*   Updated: 2025/05/23 13:15:42 by jleal            ###   ########.fr       */
+/*   Updated: 2025/05/23 18:05:34 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	free_matrix(char **av)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!av || !*av)
-		return;
+		return ;
 	while (av[i])
 		free(av[i++]);
 	free(av);
@@ -30,7 +30,7 @@ void	free_stack(t_node **stack)
 	t_node	*curr;
 
 	if (!stack)
-		return;
+		return ;
 	curr = *stack;
 	while (curr)
 	{

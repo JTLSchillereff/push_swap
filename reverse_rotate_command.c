@@ -1,43 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap_command.c                                     :+:      :+:    :+:   */
+/*   reverse_rotate_command.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/21 15:32:39 by jleal             #+#    #+#             */
-/*   Updated: 2025/05/23 17:46:19 by jleal            ###   ########.fr       */
+/*   Created: 2025/05/23 17:34:56 by jleal             #+#    #+#             */
+/*   Updated: 2025/05/23 17:54:59 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap(t_node **stk)
+void	rrotate(t_node **stk)
 {
-	long	tmp;
+	t_node	*last;
 
 	if (!*stk || !(*stk)->next)
 		return ;
-	tmp = (*stk)->value;
-	(*stk)->value = (*stk)->next->value;
-	(*stk)->next->value = tmp;
+	last = last_node(*stk);
+	last->prev->next = NULL;
+	last->prev = NULL;
+	last->next = *stk;
+	last->next->prev = last;
+	*stk = last;
 }
 
-void	sa(t_node **a)
+void	rra(t_node **a)
 {
-	swap(a);
-	printf("sa\n");
+	rrotate(a);
+	printf("rra\n");
 }
 
-void	sb(t_node **b)
+void	rrb(t_node **b)
 {
-	swap(b);
-	printf("sb\n");
+	rrotate(b);
+	printf("rrb\n");
 }
 
-void	ss(t_node **a, t_node **b)
+void	rrr(t_node **a, t_node **b)
 {
-	swap(a);
-	swap(b);
-	printf("ss\n");
+	rrotate(a);
+	rrotate(b);
+	printf("rrr\n");
 }
