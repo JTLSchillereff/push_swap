@@ -6,7 +6,7 @@
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 13:18:09 by jleal             #+#    #+#             */
-/*   Updated: 2025/05/23 20:30:02 by jleal            ###   ########.fr       */
+/*   Updated: 2025/05/26 21:12:11 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	fetch_cheapest_pa(t_node **a, t_node **b)
 			ra(a);
 }
 
-/* static void	fetch_cheapest_pb(t_node **a, t_node **b)
+static void	fetch_cheapest_pb(t_node **a, t_node **b)
 {
 	t_node	*cheapest;
 	t_node	*target;
@@ -68,7 +68,7 @@ static void	fetch_cheapest_pa(t_node **a, t_node **b)
 	else if (target->above_median)
 		while (*b != target)
 			rb(b);
-} */
+}
 
 void	push_swap(t_node **a, t_node **b)
 {
@@ -81,16 +81,8 @@ void	push_swap(t_node **a, t_node **b)
 		mini_sort(a);
 		return ;
 	}
-	/* pb(a, b);
-	pb(a, b);
-	sl = sl - 2; */
-	while (sl > 3)
-	{
-		/* init_nodes(*b, *a);
-		fetch_cheapest_pb(a, b); */
-		pb(a, b);
-		sl--;
-	}
+	sort_push(a, b);
+	//print_stacks(a, b);
 	mini_sort(a);
 	while (*b)
 	{
@@ -128,6 +120,7 @@ int	main(int ac, char **av)
 {
 	t_node	*a;
 	t_node	*b;
+	int		*arr;
 
 	a = NULL;
 	b = NULL;
@@ -136,7 +129,9 @@ int	main(int ac, char **av)
 	else if (ac == 2)
 		av = ft_split(av[1], ' ');
 	stack_init(&a, av, ac == 2);
+	//print_stacks(&a, &b);
 	if (!stack_sorted(a))
 		push_swap(&a, &b);
+	//print_stacks(&a, &b);
 	free_stack(&a);
 }

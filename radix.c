@@ -6,7 +6,7 @@
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 21:18:01 by jleal             #+#    #+#             */
-/*   Updated: 2025/05/23 21:18:10 by jleal            ###   ########.fr       */
+/*   Updated: 2025/05/25 09:44:33 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ int find_max_bits(t_node *stack) {
 }
 
 // Radix sort implementation
-void radix_sort(t_node **a, t_node **b) {
+void ps_radix_sort(t_node **a, t_node **b) {
     int max_bits = find_max_bits(*a);
-    int i, j, stack_len;
+    int i, j, sl;
 
-    stack_len = stack_len(*a);
+    sl = stack_len(*a);
     for (i = 0; i < max_bits; i++) {
-        for (j = 0; j < stack_len; j++) {
+        for (j = 0; j < sl; j++) {
             if ((((*a)->value >> i) & 1) == 0)
                 pb(a, b);  // Push to stack b if the i-th bit is 0
             else

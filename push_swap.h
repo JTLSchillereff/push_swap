@@ -6,7 +6,7 @@
 /*   By: jleal <jleal@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:59:11 by jleal             #+#    #+#             */
-/*   Updated: 2025/05/23 17:59:54 by jleal            ###   ########.fr       */
+/*   Updated: 2025/05/26 20:59:58 by jleal            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,16 @@ typedef struct s_node
 void	mini_sort(t_node **stk);
 
 void	push_swap(t_node **a, t_node **b);
+
+void ps_radix_sort(t_node **a, t_node **b);
+
+int	*lsttoarr(t_node *stk);
+
+int		find_mid(t_node *stk, int len);
+
+void ft_quicksort(int arr[], int low, int high);
+
+void	sort_push(t_node **a, t_node **b);
 
 //string utils
 char	**ft_split(const char *str, char c);
